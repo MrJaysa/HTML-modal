@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        
+        .modal {
+            user-select: none;
+            height: 100%;
+            width: 100%;
+            background-color: #0000007a;
+            backdrop-filter: blur(2px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0);
+            transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+            display: flex;
+            flex-direction: column;
+            place-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 30rem;
+            border-radius: 0.5rem;
+        }
+
+        .modal-head, .modal-body, .modal-footer {
+            padding-inline: 0.8rem;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-head, .modal-body {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.188);
+        }
+
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 30px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 40px;
+        }
+
+        .modal-footer button {
+            height: 35px;
+            border: none;
+            outline: none;
+            font-size: 11pt;
+            font-weight: bolder;
+            margin-inline: 5px;
+            border-radius: 5px;
+            width: 30%;
+        }
+
+        .modal-close-btn {
+            line-height: 1.5rem;
+            height: 1.5rem;
+            width: 1.5rem;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            background-color: rgba(211, 211, 211, 0.26);
+            color: red;
+            font-size: 15pt;
+        }
+
+        .modal-close {
+            color: white;
+            background-color: red;
+        }
+
+        .modal-close-btn:hover {
+            color: white;
+            background-color: red;
+        }
+
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1.0);
+            transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;        
+        }
+
+        .btn-primary {
+            height: 35px;
+            width: 300px;
+            border-radius: 0.25rem;
+            background-color: blue;
+            color: white;
+            font-size: 15pt;
+            border: none;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        /* media queries */
+    </style>
+</head>
+<body>
+    <div>
+        <button class="btn-primary modal-open" data-target="mode">Open modal</button>
+    </div>
+
+    <div class="modal" data-dismissible="true" id="mode">
+        <div class="modal-content">
+            <div class="modal-head">
+                <h1>Hello, I am a modal!</h1>
+                <span class="modal-close-btn close">&times;</span>
+            </div>
+            <div class="modal-body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad expedita quidem assumenda delectus fugiat repudiandae ducimus illo reiciendis similique nobis molestias dicta est suscipit velit nulla culpa, quasi excepturi, animi ea tenetur facilis.
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary">Send</button>
+                <button class="modal-close close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.modal-open').forEach((elem)=>{
+            elem.addEventListener('click', ()=>{
+                document.querySelector(`#${elem.dataset.target}`).classList.toggle('show');
+            });
+        });
+
+        document.querySelectorAll('.close').forEach((elem)=>{
+            elem.addEventListener('click', ()=>{
+                elem.offsetParent.classList.toggle('show');
+            });
+        });
+        
+        document.querySelectorAll('.modal[data-dismissible="true"]').forEach(elem=>{
+            elem.addEventListener('click', (e)=>{
+                if(e.target == elem){
+                    elem.classList.toggle('show')
+                }
+            });
+        });
+    </script> 
+</body>
+</html>
