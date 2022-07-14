@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        :root {
+            --modal-width: 40rem;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -33,7 +37,7 @@
 
         .modal-content {
             background-color: white;
-            width: 30rem;
+            width: var(--modal-width);
             border-radius: 0.5rem;
         }
 
@@ -115,6 +119,15 @@
         }
 
         /* media queries */
+        @media (max-width: 662px) {
+            :root {
+                --modal-width: 90%
+            }
+
+            .modal-head h1 {
+                font-size: 14pt;
+            }
+        }
     </style>
 </head>
 <body>
